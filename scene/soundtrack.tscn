@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://y5manyeouopl"]
+
+[ext_resource type="AudioStream" uid="uid://x3btjbbssrgi" path="res://assets/SuperHero_original.ogg" id="1_nr1y7"]
+
+[node name="Soundtrack" type="AudioStreamPlayer" unique_id=251872622]
+stream = ExtResource("1_nr1y7")
+autoplay = true
+parameters/looping = true

@@ -1,0 +1,239 @@
+[gd_scene format=3 uid="uid://n0h60x7a3824"]
+
+[ext_resource type="Script" uid="uid://bkujkf7516xmm" path="res://script/player.gd" id="1_itxqv"]
+[ext_resource type="Script" uid="uid://cjbt3spr5hnam" path="res://script/main.gd" id="1_wp4xf"]
+[ext_resource type="Script" uid="uid://60mhasy4d42n" path="res://script/ball.gd" id="2_v0l8b"]
+[ext_resource type="Script" uid="uid://hvap7ev07rmg" path="res://script/bot.gd" id="3_brvut"]
+[ext_resource type="AudioStream" uid="uid://dtltuwxsy6ued" path="res://assets/hit01.sfxr" id="5_0ha60"]
+[ext_resource type="Script" uid="uid://y3mou2ph15qs" path="res://script/pause_screen.gd" id="6_b5f6u"]
+[ext_resource type="AudioStream" uid="uid://bbn3qpdl7oplh" path="res://assets/player_score.sfxr" id="6_p1hux"]
+[ext_resource type="AudioStream" uid="uid://bkk4m7xvfqrua" path="res://assets/bot_score.sfxr" id="7_of57s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_no8bm"]
+size = Vector2(26, 107)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itxqv"]
+size = Vector2(17, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0l8b"]
+size = Vector2(1232, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brvut"]
+size = Vector2(170, 625)
+
+[node name="Main" type="Node2D" unique_id=570550457]
+script = ExtResource("1_wp4xf")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=943027837]
+position = Vector2(43, 344)
+motion_mode = 1
+script = ExtResource("1_itxqv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1655082571]
+position = Vector2(3, -0.5)
+shape = SubResource("RectangleShape2D_no8bm")
+
+[node name="ColorRect" type="ColorRect" parent="Player" unique_id=176190199]
+offset_left = -10.0
+offset_top = -54.0
+offset_right = 16.0
+offset_bottom = 53.0
+
+[node name="Player2" type="CharacterBody2D" parent="." unique_id=952644002]
+position = Vector2(1100, 344)
+motion_mode = 1
+script = ExtResource("3_brvut")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2" unique_id=2140175713]
+shape = SubResource("RectangleShape2D_no8bm")
+
+[node name="ColorRect" type="ColorRect" parent="Player2" unique_id=631589807]
+offset_left = -13.0
+offset_top = -53.0
+offset_right = 13.0
+offset_bottom = 53.0
+
+[node name="Ball" type="CharacterBody2D" parent="." unique_id=1740964590]
+position = Vector2(566, 332)
+motion_mode = 1
+script = ExtResource("2_v0l8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=821981461]
+position = Vector2(-4.5, 4.5)
+shape = SubResource("RectangleShape2D_itxqv")
+
+[node name="ColorRect" type="ColorRect" parent="Ball" unique_id=1985996849]
+offset_left = -13.0
+offset_top = -5.0
+offset_right = 4.0
+offset_bottom = 14.0
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Ball" unique_id=2068136241]
+stream = ExtResource("5_0ha60")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1894800741]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1527988169]
+position = Vector2(584, -27)
+shape = SubResource("RectangleShape2D_v0l8b")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=801589988]
+position = Vector2(584, 676)
+shape = SubResource("RectangleShape2D_v0l8b")
+
+[node name="Goal 2" type="Area2D" parent="." unique_id=682985815]
+position = Vector2(1323, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal 2" unique_id=1482502777]
+position = Vector2(-85, 325)
+shape = SubResource("RectangleShape2D_brvut")
+
+[node name="Goal 1" type="Area2D" parent="." unique_id=1279678204]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal 1" unique_id=2113320787]
+position = Vector2(-85, 324.5)
+shape = SubResource("RectangleShape2D_brvut")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=231883463]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1753938301]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 43.0
+grow_horizontal = 2
+text = "0 x 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseScreen" type="Panel" parent="CanvasLayer" unique_id=716121516]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+script = ExtResource("6_b5f6u")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseScreen" unique_id=126531287]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseTitle" type="RichTextLabel" parent="CanvasLayer/PauseScreen/VBoxContainer" unique_id=1770887219]
+layout_mode = 2
+bbcode_enabled = true
+text = "[wave][font_size =26]PAUSE"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="PauseButton" type="Button" parent="CanvasLayer/PauseScreen/VBoxContainer" unique_id=482290691]
+layout_mode = 2
+text = "Continuar"
+
+[node name="MenuButton" type="Button" parent="CanvasLayer/PauseScreen/VBoxContainer" unique_id=243115097]
+layout_mode = 2
+text = "Voltar pro menu"
+
+[node name="ResultsScreen" type="Panel" parent="CanvasLayer" unique_id=86815703]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ResultsScreen" unique_id=678162048]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Results" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/VBoxContainer" unique_id=287383273]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "Você não deveria ler isso"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Restart" type="Button" parent="CanvasLayer/ResultsScreen/VBoxContainer" unique_id=699335272]
+custom_maximum_size = Vector2(150, -1)
+layout_mode = 2
+text = "Restart"
+
+[node name="Menu" type="Button" parent="CanvasLayer/ResultsScreen/VBoxContainer" unique_id=874433288]
+custom_maximum_size = Vector2(150, -1)
+layout_mode = 2
+text = "MenuPrincipal
+"
+
+[node name="CountdownLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=706957730]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0.75686276, 1, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "BUG"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerScoreSound" type="AudioStreamPlayer" parent="." unique_id=552739818]
+stream = ExtResource("6_p1hux")
+
+[node name="BotScoreSound" type="AudioStreamPlayer" parent="." unique_id=206680743]
+stream = ExtResource("7_of57s")
+
+[connection signal="game_over" from="." to="Player" method="_on_main_game_over"]
+[connection signal="game_over" from="." to="Player2" method="_on_main_game_over"]
+[connection signal="game_over" from="." to="Ball" method="_on_main_game_over"]
+[connection signal="idle_started" from="." to="Player" method="_on_main_idle_started"]
+[connection signal="idle_started" from="." to="Player2" method="_on_main_idle_started"]
+[connection signal="idle_started" from="." to="Ball" method="_on_main_idle_started"]
+[connection signal="ingame_started" from="." to="Player" method="_on_main_ingame_started"]
+[connection signal="ingame_started" from="." to="Player2" method="_on_main_ingame_started"]
+[connection signal="ingame_started" from="." to="Ball" method="_on_main_ingame_started"]
+[connection signal="paused_started" from="." to="Ball" method="_on_main_paused_started"]
+[connection signal="stats_started" from="." to="Ball" method="_on_main_stats_started"]
+[connection signal="stats_started" from="." to="CanvasLayer/PauseScreen" method="_on_main_stats_started"]
+[connection signal="body_entered" from="Goal 2" to="." method="_on_goal_2_body_entered"]
+[connection signal="body_entered" from="Goal 1" to="." method="_on_goal_1_body_entered"]
+[connection signal="pressed" from="CanvasLayer/PauseScreen/VBoxContainer/PauseButton" to="CanvasLayer/PauseScreen" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseScreen/VBoxContainer/MenuButton" to="CanvasLayer/PauseScreen" method="_on_menu_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ResultsScreen/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/ResultsScreen/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
